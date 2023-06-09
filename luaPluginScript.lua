@@ -87,7 +87,7 @@ function onPluginLoad()
     startLog(M2TWEOP.getModPath())
 
     -- add all .CAS
-    stratmap.objects.addModelToGame("data/models_strat/residences/eastern_european_city.cas", 1);
+    stratmap.objects.addModelToGame("../../../eopData/models_strat/windmill.cas", 1);
 end
 
 function onCharacterSelected(character)
@@ -150,8 +150,6 @@ function draw(pDevice)
                 --  ImGui.SameLine(x + 120 * _wh * _wh)
                 --  ImGui.Text(FISHERY.description)
                 ImGui.EndChild()
-
-               -- merchantClickedBuild = drawMerchantPanelFooter(merchantClickedBuild)
             ImGui.End()
 
       
