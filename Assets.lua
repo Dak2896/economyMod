@@ -56,5 +56,9 @@ function loadAssets()
     -- =================== BUILDING IMAGES ======================================
     granary.x, granary.y, granary.img = M2TWEOP.loadTexture(M2TWEOP.getModPath() .. "/eopData/images/granary.tga")
     farm.x, farm.y, farm.img = M2TWEOP.loadTexture(M2TWEOP.getModPath() .. "/eopData/images/mulino.dds")
+
+
+    -- asociate asset to each building ---
+    FARM.asset = farm
 end
 

@@ -13,7 +13,7 @@ end
 function setGlobalStyles()
     -- Number of styles to clear after we are done with them
     local numColorStyles = 16
-    local numVarStyles = 6
+    local numVarStyles = 7
 
     -- Global Styles
     ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, 0, 0)
@@ -22,6 +22,7 @@ function setGlobalStyles()
     ImGui.PushStyleVar(ImGuiStyleVar.FrameBorderSize, 0.0)
     ImGui.PushStyleVar(ImGuiStyleVar.ItemInnerSpacing, 0, 0)
     ImGui.PushStyleVar(ImGuiStyleVar.ItemSpacing, 0, 0)
+    ImGui.PushStyleVar(ImGuiStyleVar.ScrollbarSize, 10)
 
 
     -- Text and Windows

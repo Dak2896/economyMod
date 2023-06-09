@@ -71,7 +71,7 @@ end
 function onNewGameStart()
     clearFactions()
     clearStructures()
-    
+
     -- TODO stop draw all custom .cas
     stratmap.objects.stopDrawModel(1);
 end
@@ -80,7 +80,7 @@ end
 function onPluginLoad()
     M2TWEOP.unlockGameConsoleCommands();
     -- M2TWEOP.setAncillariesLimit(8);
-     M2TWEOP.setMaxBgSize(150);
+    M2TWEOP.setMaxBgSize(150);
     -- M2TWEOP.setReligionsLimit(50);
     -- M2TWEOP.setBuildingChainLimit(40);
     -- M2TWEOP.setGuildCooldown(3);
@@ -120,95 +120,41 @@ function draw(pDevice)
     local numColorStyles, numVarStyles = setGlobalStyles()
 
     if showMerchantIcon then
+        
 
         if merchantIcon.img ~= nil then
-            merchantClickedBuild =  drawMerchantIcon(merchantClickedBuild)
+            merchantClickedBuild = drawMerchantIcon(merchantClickedBuild)
         end
 
         if (merchantClickedBuild) then
 
-            ImGui.SetNextWindowPos(565 * _wh, 180 * _hg)
+
+            ImGui.SetNextWindowPos(570 * _wh, 181 * _hg)
             ImGui.SetNextWindowSize(700 * _wh, 600 * _hg)
 
             merchantClickedBuild, shouldDraw = ImGui.Begin("Window#02", merchantClickedBuild,
                 ImGuiWindowFlags.NoDecoration)
 
-                local x, y = ImGui.GetCursorPos()
+                merchantClickedBuild = drawMerchantPanelTitle(merchantClickedBuild)
+            -- Structure List
+                shouldDraw = ImGui.BeginChild("StructureList#01", 680 * _wh, 320 * _hg, true, bit.bor(
+                    ImGuiWindowFlags.NoDecoration, ImGuiWindowFlags.NoMove, ImGuiWindowFlags.AlwaysVerticalScrollbar))
 
-                -- background  page image
-                ImGui.Image(panelBackground.img, 700 * _wh, 600 * _hg)
+                drawStructureElement(FARM)
+                -- TODO ADD OTHER STRUCTURES
+                -- fishery
 
-                ImGui.SetCursorPos(x + 40 * _wh, y + 40.0 * _hg)
-                ImGui.Text(MERCHANT_PANEL_TITLE)
+                --  ImGui.SetCursorPos(x + 40 * _wh, y + 290.0 * _hg)
+                --  ImGui.Button(FISHERY.localized_label)
 
-                ImGui.SetCursorPos(x + 600 * _wh, y + 540.0 * _hg)
-                ImGui.Image(closeIcon.img, 40 * _wh, 40 * _hg)
-                clicked = ImGui.IsItemClicked()
-                hovered = ImGui.IsItemHovered()
+                --  ImGui.SameLine(x + 120 * _wh * _wh)
+                --  ImGui.Text(FISHERY.description)
+                ImGui.EndChild()
 
-                if hovered then
-                    ImGui.SetCursorPos(x + 600 * _wh, y + 540.0 * _hg)
-                    ImGui.Image(closeIconHovered.img, 40 * _wh, 40 * _hg)
-                end
-                if clicked then
-                    merchantClickedBuild = false
-                end
-
-                ImGui.SetCursorPos(x + 40 * _wh, y + 80.0 * _hg)
-                ImGui.Text(MERCHANT_PANEL_SUBTITLE)
-
-                -- Structure List
-                -- granary
-                shouldDraw =  ImGui.BeginChild("StructureList#01", 680 * _wh, 350 * _hg, true, bit.bor(ImGuiWindowFlags.NoDecoration, ImGuiWindowFlags.NoMove, ImGuiWindowFlags.AlwaysVerticalScrollbar))
-
-                    ImGui.SetCursorPos(x + 40 * _wh, y + 20 * _hg)
-                    granaryClicked = ImGui.Button(FARM.localized_label)
-
-                    if granaryClicked then
-                        if (GRANARY.cost > gameDataAll.get().campaignStruct.currentFaction.money) then
-                            print("Sorry you do not have mmmonneeey!")
-                        else
-                            -- BUILDING IT!
-                            local x, y = merchatForBuildStructure.character.xCoord,
-                            merchatForBuildStructure.character.yCoord
-
-                            -- Give money back from fort cost
-                            merchatForBuildStructure.faction.money = merchatForBuildStructure.faction.money + 5000
-
-                            local newX, newY = getValidTileAround(x, y)
-                            merchatForBuildStructure.character:reposition(newX, newY)
-                            merchatForBuildStructure.faction:createFortXY(x, y)
-                        
-
-                            -- TODO SET CUSTOM .CAS FILE DEPENDING ON BUILDING
-                            stratmap.objects.setModel (x, y, 1, 1);
-
-                            merchatForBuildStructure.faction.money =
-                            merchatForBuildStructure.faction.money - GRANARY.cost
-
-                            addEconomyStructure(FARM, merchatForBuildStructure.faction)
-
-                        end
-                    end
-                    ImGui.SameLine(x + 120 * _wh)
-                    ImGui.Text("" .. FARM.description .. " " .. tostring(FARM.cost))
-
-                    ImGui.SetCursorPos(x + 500 * _wh, y + 0 * _hg)
-                    ImGui.Image(granary.img, 78 * _wh, 62 * _hg)
-
-                    ImGui.SetCursorPos(x + 580 * _wh, y + 20 * _hg)
-                    ImGui.Text(formatEarings(FARM.earning))
-
-                    -- fishery
-                    
-                    ImGui.SetCursorPos(x + 40 * _wh, y + 290.0 * _hg)
-                    ImGui.Button(FISHERY.localized_label)
-
-                    ImGui.SameLine(x + 120 * _wh * _wh)
-                    ImGui.Text(FISHERY.description)
-
-                ImGui.End()
+               -- merchantClickedBuild = drawMerchantPanelFooter(merchantClickedBuild)
             ImGui.End()
+
+      
 
         end
     end
@@ -244,7 +190,6 @@ function onCampaignMapLoaded()
         setWindowWidth(rect.right - rect.left)
         setWindowHeigth(rect.bottom - rect.top)
     end
-
 
     -- Replace all .cas file with the correct models
 

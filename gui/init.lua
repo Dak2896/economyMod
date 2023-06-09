@@ -1,5 +1,5 @@
 require('..gui/Labels')
 require('..gui/MerchantPanel')
-require('..gui/MerchantPanelFooter')
 require('..gui/StructureList')
 require('..gui/MerchantIcon')
+require('..gui/MerchantPaneTitle')
