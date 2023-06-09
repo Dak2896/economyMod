@@ -114,13 +114,6 @@ end
 
 local merchantClickedBuild = false
 
-
-
-function drawMerchantIcon(toogle)
-   
-    return clicked
-end
-
 function draw(pDevice)
     ImGui.SetMouseCursor(ImGuiMouseCursor.Arrow)
 
@@ -129,17 +122,7 @@ function draw(pDevice)
     if showMerchantIcon then
 
         if merchantIcon.img ~= nil then
-
-            ImGui.SetNextWindowPos(395 * _wh, 915 * _hg)
-            ImGui.SetNextWindowSize(20 * _wh, 20 * _hg)
-        
-            open, shouldDraw = ImGui.Begin("Window#01", open, ImGuiWindowFlags.NoDecoration)
-        
-            local clicked = ImGui.ImageButton(merchantIcon.img, 20 * _wh, 20 * _hg)
-            if (clicked == true and merchantClickedBuild == false) then
-                merchantClickedBuild = true
-            end
-            ImGui.End()
+            merchantClickedBuild =  drawMerchantIcon(merchantClickedBuild)
         end
 
         if (merchantClickedBuild) then
