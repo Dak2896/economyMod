@@ -1,0 +1,19 @@
+Make script of bulding region depedent:
+
+  -- get region resource to fill available building list
+           -- for i = region.resourcesNum - 1, 0, -1 do
+           --     print(region:getResource(i):getResourceID())
+           -- end
+
+      
+
+Standard structures (always available on each region)
+Region Structures ( You can build only if a specific resource (or more) are present)
+Region Structures (only available in certain regions)
+
+
+Make things save compatible (Must to have - Hard)
+Check with mutiple factions (Must to have  - Hard)
+Script for merchant that need to move before build on his feet (Must to have - Medium)
+Change .cas file and texture an keep them on game reload game closed etc... (maybe are multiple task no idea - Must to have - ???)
+Remove default fort cost (Must to have - Easy)
