@@ -19,9 +19,11 @@ function drawStructureElement(STRUCTURE)
             merchatForBuildStructure.character:reposition(newX, newY)
             merchatForBuildStructure.faction:createFortXY(x, y)
         
-
-            -- TODO SET CUSTOM .CAS FILE DEPENDING ON BUILDING
-            stratmap.objects.setModel (x, y, 1, 1);
+            local modelId = STRUCTURE.model_ID
+            STRUCTURE.x = x
+            STRUCTURE.y = y
+            print("model id: "..modelId)
+            stratmap.objects.setModel (x, y, modelId, modelId);
 
             merchatForBuildStructure.faction.money =
             merchatForBuildStructure.faction.money - STRUCTURE.cost

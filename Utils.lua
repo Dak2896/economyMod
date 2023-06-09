@@ -66,3 +66,42 @@ function getEarnings(tb1)
     return earning
 end
 
+
+function setCasModels(tbl)
+    local id = nil
+    local x = nil
+    local y = nil
+    if not tbl then
+        print("Nil table")
+        return
+    end
+    for k, v in pairs(tbl) do
+        if type(v) == "table" then
+            setCasModels(v)
+        else
+            if k == "model_ID" then
+                id = v
+                print("trovo id")
+            end
+            if k == "x" then
+                x = v
+                print("trovo x")
+            end
+            if k == "y" then
+                y = v
+                print("trovo y")
+            end
+
+            if x ~= nil and y ~= nil and id ~= nil then
+                print("piazzo e resetto")
+                stratmap.objects.setModel (x, y, id, id)
+                x = nil
+                y = nil
+                id = nil
+            end
+
+        end
+    end
+end
+
+

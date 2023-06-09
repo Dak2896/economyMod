@@ -35,15 +35,6 @@ local MapCords = {
     y = 0
 }
 
-function MapCords.new(x, y)
-    local self = setmetatable({}, MapCords)
-
-    self.x = x or 0
-    self.y = y or 0
-
-    return self
-end
-
 -- Generic class represent a structure no earning add of structure build
 local EconomyStructure = {
     localized_label = "", -- visualized name on GUI/UI
@@ -52,36 +43,17 @@ local EconomyStructure = {
     model_ID = O -- id of the model for save it in memory
 }
 
-function EconomyStructure.new(localized_label, level, model_path, model_ID)
+function EconomyStructure.new(localized_label, level, model_path, model_ID, x, y)
     local self = setmetatable({}, EconomyStructure)
 
     self.localized_label = localized_label or ""
     self.level = level or 0
     self.model_path = model_path or ""
     self.model_ID = model_ID or ""
+    self.x = x or 0
+    self.y = y or 0
     return self
 end
-
-local EconomyMapStructure = {
-    cords = MapCords.new(),
-    faction_ownerID = 0,
-    structure = EconomyStructure.new()
-}
-
-function EconomyMapStructure.new(cords, faction_owner, struct)
-    local self = setmetatable({}, EconomyMapStructure)
-
-    self.cords = cords
-    self.faction_ownerID = faction_owner
-    self.structure = struct
-
-    return self
-end
-
-function buildStructureAtMerchantPosition(structure, merchant, faction)
-
-end
-
 
 -- variable to control the opening of mechant panel on agent onCharacterSelected
 showMerchantIcon = false
@@ -92,22 +64,22 @@ merchatForBuildStructure = nil
 
 
 -- DEFINE EACH SPECIFIC STRUCTURE EARNINGS FORM EARNING TABLE
-MARKET = EconomyStructure.new("Market", 1, "#01")
+MARKET = EconomyStructure.new("Market", 1, "", 1)
 MARKET.earning = EARNINGS["MARKET"]
 MARKET.description = DESCRIPTION["MARKET"]
 MARKET.cost = COST_TABLE["Market"]
 
-FISHERY = EconomyStructure.new("Fishery", 1, "#02")
+FISHERY = EconomyStructure.new("Fishery", 1, "", 2)
 FISHERY.earning = EARNINGS["FISHERY"]
 FISHERY.description = DESCRIPTION["FISHERY"]
 FISHERY.cost = COST_TABLE["FISHERY"]
 
-GRANARY = EconomyStructure.new("Granary", 1, "#03")
+GRANARY = EconomyStructure.new("Granary", 1, "", 3)
 GRANARY.earning = EARNINGS["GRANARY"]
 GRANARY.description = DESCRIPTION["GRANARY"]
 GRANARY.cost = COST_TABLE["GRANARY"]
 
-FARM = EconomyStructure.new("Farm", 1, "#04")
+FARM = EconomyStructure.new("Farm", 1, "4", 3)
 FARM.earning = EARNINGS["FARM"]
 FARM.description = DESCRIPTION["FARM"]
 FARM.cost = COST_TABLE["FARM"]

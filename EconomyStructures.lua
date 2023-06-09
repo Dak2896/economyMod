@@ -38,6 +38,9 @@ function getStructuresIncome(faction)
             print("from my structure i will earn: " ..earningTotalFromStructures)
             faction.money = faction.money + earningTotalFromStructures
         end
-
     end
+end
+
+function replaceFortressWithCas()
+    setCasModels(economyStructureBuild)
 end

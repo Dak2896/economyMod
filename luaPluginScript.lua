@@ -87,7 +87,7 @@ function onPluginLoad()
     startLog(M2TWEOP.getModPath())
 
     -- add all .CAS
-    stratmap.objects.addModelToGame("../../../eopData/models_strat/windmill.cas", 1);
+    stratmap.objects.addModelToGame("eopData/models_strat/windmill.cas", 3);
 end
 
 function onCharacterSelected(character)
@@ -190,7 +190,7 @@ function onCampaignMapLoaded()
     end
 
     -- Replace all .cas file with the correct models
-
+    replaceFortressWithCas()
 end
 
 function onFactionTurnStart(fac)
