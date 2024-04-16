@@ -80,7 +80,7 @@ end
 function onPluginLoad()
     M2TWEOP.unlockGameConsoleCommands();
     -- M2TWEOP.setAncillariesLimit(8);
-    M2TWEOP.setMaxBgSize(150);
+    -- M2TWEOP.setMaxBgSize(150);
     -- M2TWEOP.setReligionsLimit(50);
     -- M2TWEOP.setBuildingChainLimit(40);
     -- M2TWEOP.setGuildCooldown(3);
@@ -128,7 +128,6 @@ function draw(pDevice)
 
         if (merchantClickedBuild) then
 
-
             ImGui.SetNextWindowPos(570 * _wh, 181 * _hg)
             ImGui.SetNextWindowSize(700 * _wh, 600 * _hg)
 
@@ -152,8 +151,6 @@ function draw(pDevice)
                 ImGui.EndChild()
             ImGui.End()
 
-      
-
         end
     end
 
@@ -170,6 +167,9 @@ function onClickAtTile(x, y)
         showMerchantIcon = false
         merchantClickedBuild = false
     end
+
+    print("la x: :" ..x)
+    print("la y: :" ..y)
 
 end
 
@@ -215,6 +215,31 @@ function onFactionTurnStart(fac)
         end
 
     end
+end
+
+function onStartSiege (xCoord, yCoord)
+    -- FIRST i get region by coords.
+    local sMap = gameDataAll.get().stratMap;
+    local tile = sMap.getTile(xCoord, yCoord);
+    local region = sMap.getRegion(tile.regionID);
+    -- Loop inside all forts of region to find our coordinates
+
+    for i=0, region.fortsNum do
+        fort = region:getFort(i)
+        if fort then
+            --print(fort.xCoord..", "..fort.yCoord)
+            if xCoord == 72 and yCoord == 238 then
+                print("fort siege: "..fort.siege.besieger.numOfUnits  )
+
+                sett = fort.siege.besieger.besiegedSettlement
+                fort.siege.besieger:siegeSettlement(sett)
+                fort.siege.besieger:siegeSettlement(sett)
+               -- print("fort siege: "..fort.siege.besieger.besiegedSettlement)
+            end
+        end
+      
+    end
+    
 end
 
 --------------------------------------------------------------------------------
